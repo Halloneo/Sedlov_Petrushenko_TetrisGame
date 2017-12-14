@@ -5,10 +5,19 @@ namespace ConsoleTetrisGame
 {
 	public class Block
 	{
+        /// <summary>
+        /// List of all blocks
+        /// </summary>
 		private readonly List<int[,]> _blocks;
 
+        /// <summary>
+        /// Number of next random block
+        /// </summary>
 		private readonly Random _random;
-		
+
+		/// <summary>
+        /// Constructor of class Block
+        /// </summary>
 		public Block()
 		{
 			_random = new Random(DateTime.Now.Millisecond);
@@ -37,6 +46,11 @@ namespace ConsoleTetrisGame
 			};
 
 		}
+        /// <summary>
+        /// Returns block depending on id
+        /// </summary>
+        /// <param name="id">Number of block</param>
+        /// <returns>Block</returns>
 		public int[,] GetBlock(int id)
 		{
 			if (_blocks.Count > id && id >= 0)
@@ -45,8 +59,17 @@ namespace ConsoleTetrisGame
 			return null;
 		}
 		
+        /// <summary>
+        /// Returns random block
+        /// </summary>
+        /// <returns>Block</returns>
 		public int[,] GetRandomBlock() => _blocks[_random.Next(_blocks.Count)];
-		
+
+		/// <summary>
+        /// Rotates block clockwise
+        /// </summary>
+        /// <param name="block">Block to be rotated</param>
+        /// <returns>Rotated block</returns>
 		public static int[,] Rotate(int[,] block)
 		{
 			var width = block.GetUpperBound(0) + 1;
