@@ -5,24 +5,21 @@ namespace ConsoleTetrisGame
 {
 	public class Block
 	{
-        /// <summary>
-        /// List of all blocks
-        /// </summary>
-		private readonly List<int[,]> _blocks;
+		/// <summary>
+		/// Random variable
+		/// </summary>
+		public Random Random { get; }
 
-        /// <summary>
-        /// Number of next random block
-        /// </summary>
-		private readonly Random _random;
+		public List<int[,]> Blocks { get; }
 
 		/// <summary>
-        /// Constructor of class Block
-        /// </summary>
+		/// Constructor of class Block
+		/// </summary>
 		public Block()
 		{
-			_random = new Random(DateTime.Now.Millisecond);
+			Random = new Random(DateTime.Now.Millisecond);
 
-			_blocks = new List<int[,]>
+			Blocks = new List<int[,]>
 			{
 				new[,] { { 1, 1, 1, 1 } },
 
@@ -44,17 +41,17 @@ namespace ConsoleTetrisGame
 				new [,] { { 0, 7, 7 },
 						  { 7, 7, 0 } }
 			};
-
 		}
+
         /// <summary>
         /// Returns block depending on id
         /// </summary>
         /// <param name="id">Number of block</param>
-        /// <returns>Block</returns>
+        /// <returns>Block or null</returns>
 		public int[,] GetBlock(int id)
 		{
-			if (_blocks.Count > id && id >= 0)
-				return _blocks[id];
+			if (Blocks.Count > id && id >= 0)
+				return Blocks[id];
 
 			return null;
 		}
@@ -63,7 +60,7 @@ namespace ConsoleTetrisGame
         /// Returns random block
         /// </summary>
         /// <returns>Block</returns>
-		public int[,] GetRandomBlock() => _blocks[_random.Next(_blocks.Count)];
+		public int[,] GetRandomBlock() => Blocks[Random.Next(Blocks.Count)];
 
 		/// <summary>
         /// Rotates block clockwise
@@ -82,7 +79,5 @@ namespace ConsoleTetrisGame
 					rotated[j, width - i - 1] = block[i, j];
 			return rotated;
 		}
-
 	}
 }
-
