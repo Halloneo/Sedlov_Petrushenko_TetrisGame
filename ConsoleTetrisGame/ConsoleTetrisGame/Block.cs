@@ -10,6 +10,9 @@ namespace ConsoleTetrisGame
 		/// </summary>
 		public Random Random { get; }
 
+		/// <summary>
+		/// List of all blocks
+		/// </summary>
 		public List<int[,]> Blocks { get; }
 
 		/// <summary>
