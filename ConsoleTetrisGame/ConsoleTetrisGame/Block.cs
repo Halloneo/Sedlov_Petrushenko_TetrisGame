@@ -24,22 +24,22 @@ namespace ConsoleTetrisGame
 				new[,] { { 1, 1, 1, 1 } },
 
 				new [,] { { 2, 2 },
-						  { 2, 2 } },
+					  { 2, 2 } },
 
 				new[,] { { 0, 0, 3 },
-						 { 3, 3, 3 } },
+					 { 3, 3, 3 } },
 
 				new[,] { { 4, 0, 0 },
-						 { 4, 4, 4 } },
+					 { 4, 4, 4 } },
 
 				new [,] { { 0, 5, 0 },
-						  { 5, 5, 5 } },
+					  { 5, 5, 5 } },
 
 				new [,] { { 6, 6, 0 },
-						  { 0, 6, 6 } },
+					  { 0, 6, 6 } },
 
 				new [,] { { 0, 7, 7 },
-						  { 7, 7, 0 } }
+					  { 7, 7, 0 } }
 			};
 		}
 
@@ -48,36 +48,36 @@ namespace ConsoleTetrisGame
         /// </summary>
         /// <param name="id">Number of block</param>
         /// <returns>Block or null</returns>
-		public int[,] GetBlock(int id)
-		{
-			if (Blocks.Count > id && id >= 0)
-				return Blocks[id];
+	public int[,] GetBlock(int id)
+	{
+		if (Blocks.Count > id && id >= 0)
+			return Blocks[id];
 
-			return null;
-		}
+		return null;
+	}
 		
         /// <summary>
         /// Returns random block
         /// </summary>
         /// <returns>Block</returns>
-		public int[,] GetRandomBlock() => Blocks[Random.Next(Blocks.Count)];
+	public int[,] GetRandomBlock() => Blocks[Random.Next(Blocks.Count)];
 
 		/// <summary>
         /// Rotates block clockwise
         /// </summary>
         /// <param name="block">Block to be rotated</param>
         /// <returns>Rotated block</returns>
-		public static int[,] Rotate(int[,] block)
-		{
-			var width = block.GetUpperBound(0) + 1;
-			var height = block.GetUpperBound(1) + 1;
+	public static int[,] Rotate(int[,] block)
+	{
+		var width = block.GetUpperBound(0) + 1;
+		var height = block.GetUpperBound(1) + 1;
 
-			var rotated = new int[height, width];
+		var rotated = new int[height, width];
 
-			for (int i = 0; i < width; i++)
-				for (int j = 0; j < height; j++)
-					rotated[j, width - i - 1] = block[i, j];
-			return rotated;
-		}
+		for (int i = 0; i < width; i++)
+			for (int j = 0; j < height; j++)
+				rotated[j, width - i - 1] = block[i, j];
+		return rotated;
+	}
 	}
 }
