@@ -10,9 +10,8 @@ namespace ConsoleTetrisGame
 		{
 			GameCore game = new GameCore();
 			SoundPlayer sp = new SoundPlayer();
-			
-			sp.SoundLocation = Environment.CurrentDirectory + "\\Music.wav";
-			
+
+			sp.SoundLocation =  @"..\..\Music.wav";
 			sp.PlayLooping();
             game.StartGame();
 			sp.Stop();
