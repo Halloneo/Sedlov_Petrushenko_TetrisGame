@@ -5,8 +5,14 @@ namespace ConsoleTetrisGame
 {
 	public class GameCore
 	{
+        /// <summary>
+        /// Object of class Tetris
+        /// </summary>
 		public Tetris Tetris { get; private set; }
 
+        /// <summary>
+        /// Thread for method Stepper
+        /// </summary>
 		public Thread Mover { get; private set; }
 
 		/// <summary>
@@ -14,14 +20,30 @@ namespace ConsoleTetrisGame
 		/// </summary>
 		private  bool _drawLock;
 
+        /// <summary>
+        /// Score of current game
+        /// </summary>
 		public int Points { get; private set; }
 
+        /// <summary>
+        /// Counter which influences on speed of the game
+        /// </summary>
 		public int ThreadCounter { get; private set; }
 
+        /// <summary>
+        /// Constante that is being added to ThreadCounter
+        /// </summary>
 		private const int Step = 10;
 		
+        /// <summary>
+        /// Adds amount of done lines to score
+        /// </summary>
+        /// <param name="lines">Amount of done lines</param>
 		private void T_LinesDone(int lines) => Points += lines;
 
+        /// <summary>
+        /// Core method of the game
+        /// </summary>
 		public void StartGame()
 		{
 			//Default Values and Game initialization
@@ -81,11 +103,12 @@ namespace ConsoleTetrisGame
 			Thread.Sleep(100);
 			Console.Clear();
 			Writer.PrintEnd(Points);
-			while (Console.ReadKey(true).Key != ConsoleKey.Escape) { }
-			Console.ResetColor();
-			Console.CursorVisible = true;
+            Console.ResetColor();
 		}
 
+        /// <summary>
+        /// Moves block down
+        /// </summary>
 		public void Stepper()
 		{
 			while (Tetris.Running)
@@ -95,7 +118,7 @@ namespace ConsoleTetrisGame
 				Writer.DrawField(ref _drawLock, Points, Tetris.Container, Tetris.Level, Tetris.Next);
 
 				//Increase Speed when Lines are made
-				while (ThreadCounter < 1000 - Points * 10 && Tetris.Running)
+				while (ThreadCounter < 1000 - Points * 3 && Tetris.Running)
 				{
 					Thread.Sleep(Step);
 					ThreadCounter += Step;

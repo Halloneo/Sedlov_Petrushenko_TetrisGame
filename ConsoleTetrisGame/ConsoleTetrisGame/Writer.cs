@@ -7,7 +7,9 @@ namespace ConsoleTetrisGame
 		private const string Block = "■ ";
 		private const string Border = "■ ";
 		private const string Empty = "  ";
-
+        /// <summary>
+        /// Clears block
+        /// </summary>
 		public static int[,] ClearBlock { get; } =
 		{
 			{0, 0, 0, 0},
@@ -15,7 +17,11 @@ namespace ConsoleTetrisGame
 			{0, 0, 0, 0},
 			{0, 0, 0, 0}
 		};
-
+        /// <summary>
+        /// Writes array and border of array if needed
+        /// </summary>
+        /// <param name="array">Array</param>
+        /// <param name="isWriteBorder">Is it needed to write border</param>
 		public static void WriteArray(int[,] array, bool isWriteBorder)
 		{
 			int x = Console.CursorLeft;
@@ -68,7 +74,11 @@ namespace ConsoleTetrisGame
 					Console.Write(Border);
 			}
 		}
-
+        /// <summary>
+        /// Writes string with chosen color
+        /// </summary>
+        /// <param name="str">String</param>
+        /// <param name="color">Color</param>
 		public static void Write(string str, ConsoleColor color)
 		{
 			ConsoleColor save = Console.ForegroundColor;
@@ -78,7 +88,14 @@ namespace ConsoleTetrisGame
 			Console.ForegroundColor = ConsoleColor.DarkGray;
 			Console.ForegroundColor = save;
 		}
-
+        /// <summary>
+        /// Prints current game field
+        /// </summary>
+        /// <param name="drawLock">Lock of Drawing Function</param>
+        /// <param name="points">Score</param>
+        /// <param name="container">Game field</param>
+        /// <param name="level">Block</param>
+        /// <param name="nextBlock">Next block</param>
 		public static void DrawField(ref bool drawLock, int points, int[,] container, int[,] level, int[,] nextBlock)
 		{
 			//locks the Field
@@ -114,7 +131,9 @@ namespace ConsoleTetrisGame
 			Console.SetCursorPosition(posX, posY);
 			drawLock = false;
 		}
-
+        /// <summary>
+        /// Prints Start menu on console
+        /// </summary>
 		public static void PrintStart()
 		{
 			Write(@"
@@ -128,14 +147,18 @@ namespace ConsoleTetrisGame
 	
 	Press a Key to start", ConsoleColor.White);
 		}
-
+        /// <summary>
+        /// Prints End menu and current score on console
+        /// </summary>
+        /// <param name="points"></param>
 		public static void PrintEnd(int points)
 		{
 
 			Write($@"
 		    Game Over!
 
-	You made {points} lines. Press Esc to exit
+	        You made {points} lines. 
+    Press Esc to exit or press Enter to restart
     ",
 			ConsoleColor.White);
 		}
