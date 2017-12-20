@@ -21,13 +21,18 @@ namespace ConsoleTetrisGame
 		private  bool _drawLock;
 
         /// <summary>
-        /// Score of current game
+        /// Ammount of deleted lines
         /// </summary>
+		public int Lines { get; private set; }
+
+		/// <summary>
+		/// Score of current game
+		/// </summary>
 		public int Points { get; private set; }
 
-        /// <summary>
-        /// Counter which influences on speed of the game
-        /// </summary>
+		/// <summary>
+		/// Counter which influences on speed of the game
+		/// </summary>
 		public int ThreadCounter { get; private set; }
 
         /// <summary>
@@ -39,21 +44,33 @@ namespace ConsoleTetrisGame
         /// Adds amount of done lines to score
         /// </summary>
         /// <param name="lines">Amount of done lines</param>
-		private void T_LinesDone(int lines) => Points += lines;
+		private void T_LinesDone(int lines)
+		{
+			if (lines == 1)
+				Points += 100;
+			else if (lines == 2)
+				Points += 300;
+			else if (lines == 3)
+				Points += 700;
+			else if (lines == 4)
+				Points += 1500;
+			
+			Lines += lines;
+		}
 
-        /// <summary>
+		/// <summary>
         /// Core method of the game
         /// </summary>
 		public void StartGame()
 		{
 			//Default Values and Game initialization
 			Console.Clear();
-			Console.ForegroundColor = ConsoleColor.Gray;
+			Console.ForegroundColor = ConsoleColor.White;
 			Console.BackgroundColor = ConsoleColor.Black;
 			Console.CursorVisible = false;
-			Console.WindowWidth = 52;
+			Console.WindowWidth = 55;
 			Console.WindowHeight = 22;
-			Points = 0;
+			Lines = 0;
 			_drawLock = false;
 			Tetris = new Tetris(10, 20);
 			Tetris.LinesDone += T_LinesDone;
@@ -63,7 +80,7 @@ namespace ConsoleTetrisGame
 			Console.Clear();
 
 			Tetris.Start();
-			Mover = new Thread(Stepper) { IsBackground = true };
+			Mover = new Thread(Stepper) { IsBackground = false };
 			Mover.Start();
 
 			while (Tetris.Running)
@@ -96,13 +113,13 @@ namespace ConsoleTetrisGame
 								Tetris.GameOver();
 								break;
 						}
-						Writer.DrawField(ref _drawLock, Points, Tetris.Container, Tetris.Level, Tetris.Next);
+						Writer.DrawField(ref _drawLock, Lines, Points, Tetris.Container.GetLength(0)+5, Tetris.Level, Tetris.Next);
 					}
 				}
 			}
 			Thread.Sleep(100);
 			Console.Clear();
-			Writer.PrintEnd(Points);
+			Writer.PrintEnd(Lines, Points);
             Console.ResetColor();
 		}
 
@@ -115,10 +132,10 @@ namespace ConsoleTetrisGame
 			{
 				ThreadCounter = 600;
 				Tetris.Step();
-				Writer.DrawField(ref _drawLock, Points, Tetris.Container, Tetris.Level, Tetris.Next);
+				Writer.DrawField(ref _drawLock, Lines, Points, Tetris.Container.GetLength(0) + 5, Tetris.Level, Tetris.Next);
 
 				//Increase Speed when Lines are made
-				while (ThreadCounter < 1000 - Points * 3 && Tetris.Running)
+				while (ThreadCounter < 1000 - Lines * 3 && Tetris.Running)
 				{
 					Thread.Sleep(Step);
 					ThreadCounter += Step;
