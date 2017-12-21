@@ -100,7 +100,6 @@ namespace ConsoleTetrisGame
 								break;
 							case ConsoleKey.UpArrow:
 								Tetris.KeyPressing(Tetris.Key.Up);
-								ThreadCounter = 0;
 								break;
 							case ConsoleKey.DownArrow:
 								Tetris.KeyPressing(Tetris.Key.Down);
