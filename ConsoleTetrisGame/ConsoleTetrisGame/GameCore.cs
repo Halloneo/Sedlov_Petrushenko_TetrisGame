@@ -71,6 +71,8 @@ namespace ConsoleTetrisGame
 			Console.WindowWidth = 55;
 			Console.WindowHeight = 22;
 			Lines = 0;
+			Points = 0;
+
 			_drawLock = false;
 			Tetris = new Tetris(10, 20);
 			Tetris.LinesDone += T_LinesDone;
