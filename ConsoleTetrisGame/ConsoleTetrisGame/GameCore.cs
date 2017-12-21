@@ -103,7 +103,6 @@ namespace ConsoleTetrisGame
 								break;
 							case ConsoleKey.DownArrow:
 								Tetris.KeyPressing(Tetris.Key.Down);
-								ThreadCounter = 0;
 								break;
 							case ConsoleKey.Spacebar:
 								Tetris.KeyPressing(Tetris.Key.Space);
@@ -129,7 +128,7 @@ namespace ConsoleTetrisGame
 		{
 			while (Tetris.Running)
 			{
-				ThreadCounter = 600;
+				ThreadCounter = 800;
 				Tetris.Step();
 				Writer.DrawField(ref _drawLock, Lines, Points, Tetris.Container.GetLength(0) + 5, Tetris.Level, Tetris.Next);
 
